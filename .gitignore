@@ -1,0 +1,9 @@
+/.history/
+/dist/
+/node_modules/
+/*/.history/
+/*/node_modules/
+/*/dist/
+
+/.vscode/
+/.idea/
