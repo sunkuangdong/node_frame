@@ -1,12 +1,15 @@
 const express = require('express');
-
 const app = express();
+const fn = require('./fn1')
+
 // 大小写敏感 - 必须放在第一个
 app.set("case sensitive routing", true);
 // 默认目录
 app.set("views", 'frank')
 // 默认的实图引擎 pug/ejs
 app.set('view engine', 'ejs');
+
+app.locals.pageTitle = '我的个人网站';
 
 // 如果你请求的是一个json, 他就会把json解析出来, 放在body里
 // express.json() 会返回一个函数
@@ -19,11 +22,13 @@ app.use(express.json());
 //     res.send('style.css')
 // })
 
-app.get('/test', (req, res, next) => {
-    res.render('test', {
-        pageTitle: '方方'
-    })
-})
+// app.get('/test', (req, res, next) => {
+//     res.render('test', {
+//         pageTitle: '方方'
+//     })
+// })
+
+app.use(fn)
 
 app.post('/test', (req, res, next) => {
     res.send("post test")
