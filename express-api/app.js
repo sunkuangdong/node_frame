@@ -25,6 +25,22 @@ app.get('/test', (req, res, next) => {
     })
 })
 
+app.post('/test', (req, res, next) => {
+    res.send("post test")
+})
+
+app.put('/test', (req, res, next) => {
+    res.send("put test")
+})
+
+app.delete('/test', (req, res, next) => {
+    res.send("delete test")
+})
+
+app.patch('/test', (req, res, next) => {
+    res.send("patch test")
+})
+
 app.use((request, response, next) => {
     console.log(request.path, request.body);
     response.send('hi');
