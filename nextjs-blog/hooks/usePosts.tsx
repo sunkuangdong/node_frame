@@ -2,12 +2,10 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 
+
 type Posts = {
     id: string;
-    date: string;
-    title: string;
 }
-
 export const usePosts = () => {
     // 初始化数据
     const [posts, setPosts] = useState<Posts[]>([])
