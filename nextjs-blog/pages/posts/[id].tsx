@@ -7,6 +7,7 @@ type Post = {
     id: string;
     title: string;
     content: string;
+    htmlContent: string;
 }
 type Props = {
     post: Post
@@ -16,8 +17,7 @@ const postsShow: NextPage<Props> = (props) => {
     return (
         <>
             <h1>{post.title}</h1>
-            <article>
-                {post.content}
+            <article dangerouslySetInnerHTML={{ __html: post.htmlContent }}>
             </article>
         </>
     )
