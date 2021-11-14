@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
-import getPosts from "lib/posts";
+import { getPosts } from "lib/posts";
+import Link from "next/link";
 type Posts = {
   id: string;
 }
@@ -19,7 +20,9 @@ const PostsIndex: NextPage<Props> = (props) => {
     <div>
       <h1>服务端渲染</h1>
       {posts.map(item => <div key={item.id}>
-        {item.id}
+        <Link href={`/posts/${item.id}`}>
+          <a>{item.id}</a>
+        </Link>
       </div>)}
     </div>
   )
