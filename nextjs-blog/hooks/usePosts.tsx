@@ -22,5 +22,5 @@ export const usePosts = () => {
             setIsLoading(false)
         })
     }, [])
-    return { isLoading, posts }
+    return { isLoading, posts, setPosts, setIsLoading }
 }
