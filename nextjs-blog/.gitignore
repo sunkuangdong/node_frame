@@ -6,6 +6,7 @@
 /dist/
 /.history/
 .pnp.js
+/blog-data
 
 # testing
 /coverage
