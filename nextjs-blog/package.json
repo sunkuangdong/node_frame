@@ -2,11 +2,10 @@
   "name": "nextjs-blog",
   "private": true,
   "scripts": {
-    "dev": "next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx",
+    "dev": "concurrently \"next dev\" \"babel -w ./src --out-dir dist --extensions .ts,.tsx\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typeorm:build": "",
     "migration:run": "typeorm migration:run",
     "migration:revert": "typeorm migration:revert"
   },
@@ -34,6 +33,7 @@
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
     "@types/ua-parser-js": "^0.7.36",
+    "concurrently": "^6.4.0",
     "eslint": "7",
     "eslint-config-next": "12.0.3",
     "next-images": "^1.8.2",
