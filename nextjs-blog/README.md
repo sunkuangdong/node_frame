@@ -56,7 +56,10 @@ CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYP
 \c blog_development
 ```
 
-## 查看当前表
+## 查看当前数据库表
+```
+/dt
+```
 
 ## 退出数据库
 ```
