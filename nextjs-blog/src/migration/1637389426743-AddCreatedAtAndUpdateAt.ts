@@ -53,7 +53,7 @@ export class AddCreatedAtAndUpdateAt1637389426743 implements MigrationInterface 
         await queryRunner.dropColumn("posts", "createdAt");
         await queryRunner.dropColumn("posts", "updatedAt");
         await queryRunner.dropColumn("comments", "createdAt");
-        await queryRunner.dropColumn("comments", "updatedAt");
+        return await queryRunner.dropColumn("comments", "updatedAt");
     }
 
 }

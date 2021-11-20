@@ -2,13 +2,13 @@ import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGenerate
 import { User } from "./User";
 import { Comment } from "./Comment";
 
-@Entity()
+@Entity("posts")
 export class Post {
     @PrimaryGeneratedColumn("increment") id: number;
     @Column("varchar") title: string;
     @Column("text") content: string;
-    @CreateDateColumn({ type: "timestamp" }) createdAt: Date;
-    @UpdateDateColumn({ type: "timestamp" }) updatedAt: Date;
+    @CreateDateColumn() createdAt: Date;
+    @UpdateDateColumn() updatedAt: Date;
     @ManyToOne(type => User, user => user.posts) author: User;
     @OneToMany(type => Comment, comment => comment.post) comments: Comment[];
 }
