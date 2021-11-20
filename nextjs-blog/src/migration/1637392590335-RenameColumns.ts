@@ -17,3 +17,4 @@ export class RenameColumns1637392590335 implements MigrationInterface {
     }
 
 }
+
