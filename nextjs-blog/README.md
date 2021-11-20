@@ -44,14 +44,19 @@ psql -U blog
 \l
 ```
 
-#### 删除表，重新创建
+#### 删除表、重新创建、链接表
 ```
 // 删除
 drop database blog_development;
 
 // 创建
 CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
+
+// 链接
+\c blog_development
 ```
+
+## 查看当前表
 
 ## 退出数据库
 ```
@@ -67,9 +72,10 @@ yarn dev
 // 第二：babel监听本地seed.ts文件变动，重新编译
 ```
 
-## 创建migration：nextjs-blog/src/migration/1637378321755-CreateUsers.ts
+## 创建 migration：nextjs-blog/src/migration/1637378321755-CreateUsers.ts
 ```
 yarn m:create -n CreateUsers
+// 这样就生成了一个表，这个文件的代码会操作这个表
 ```
 
 #### 运行 1637378321755-CreateUsers.ts 创建表

@@ -1,22 +1,26 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateUsers1637378321755 implements MigrationInterface {
-
+// 评论表
+export class CreateComments1637388673257 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         return await queryRunner.createTable(new Table({
-            name: "users", // 名称必传
+            name: "comments", // 名称必传
             // 列
             columns: [
                 // 第一列
                 { name: 'id', isGenerated: true, type: 'int', generationStrategy: "increment", isPrimary: true },
-                { name: 'username', type: "varchar" },
-                { name: 'password_digest', type: "varchar" },
+                // 谁评论的
+                { name: 'user_id', type: "int" },
+                // 哪篇文章
+                { name: 'post_id', type: "int" },
+                // 评论内容
+                { name: 'content', type: "text" },
             ]
         }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        return await queryRunner.dropTable("users");
+        return await queryRunner.dropTable("comments");
     }
 
 }
