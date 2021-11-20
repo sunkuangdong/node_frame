@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 初始代码
 
-## Getting Started
+## 检查之前的数据库
+```
+docker ps
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
+// 会返回一个id: 7f40bedb17dd
+// 这个id每次不一样，只是举例子
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 杀死之前的数据库
+```
+docker kill 7f40bedb17dd
+```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 删除之前的数据库
+```
+docker rm 7f40bedb17dd
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 启动数据库(得到新的虚拟机)
+```
+mkdir blog-data
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+docker run -v "$PWD/blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
 
-## Learn More
+或者旧版 Windows Docker 客户端运行下面的代码
 
-To learn more about Next.js, take a look at the following resources:
+docker run -v "blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 进入当前的虚拟机
+```
+docker exec -it 7af929b62444 bash
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 进入当前的数据库
+```
+psql -U blog
+```
 
-## Deploy on Vercel
+#### 看一下有哪些数据表
+```
+\l
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### 删除表，重新创建
+```
+// 删除
+drop database blog_development;
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+// 创建
+CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
+```
+
+## 退出数据库
+```
+// 快捷键 按两次
+control + d
+```
+
+## 运行
+```
+yarn dev
+// 做了两件事：
+// 第一：启动本地sever
+// 第二：babel监听本地seed.ts文件变动，重新编译
+```
+
+## 创建migration：nextjs-blog/src/migration/1637378321755-CreateUsers.ts
+```
+yarn m:create -n CreateUsers
+```
+
+#### 运行 1637378321755-CreateUsers.ts 创建表
+```
+yarn m:run
+```
