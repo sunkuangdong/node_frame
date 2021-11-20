@@ -7,8 +7,8 @@ export class User {
     @PrimaryGeneratedColumn("increment") id: number;
     @Column("varchar") username: string;
     @Column("varchar") passwordDigest: string;
-    @CreateDateColumn("time") createdAt: Date;
-    @UpdateDateColumn("time") updatedAt: Date;
+    @CreateDateColumn({ type: "timestamp" }) createdAt: Date;
+    @UpdateDateColumn({ type: "timestamp" }) updatedAt: Date;
     @OneToMany(type => Post, post => post.author) posts: Post[];
     @OneToMany(type => Comment, comment => comment.user) comments: Comment[];
 }
